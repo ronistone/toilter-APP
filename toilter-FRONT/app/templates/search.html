@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p> </p>
+{% if current_user.is_authenticated %}
+<form method="POST", action="{{url_for('search',users=form1.search.data)}}">
+  <div class="form-group">
+  <center>  {{ form1.search(class="form-control",placeholder="Encontre seus Amigos!")}}
+    <p></p>
+    {{form1.submit(class="btn btn-primary")}}
+  </center>
+    </div>
+  </form>
+{% endif %}
+{% if search %}
+{% for U in search %}
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+    </a>
+  </div>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ U.name }}
+    <a href=/twitero/{{U.id}}><small>@{{ U.name }}</small></a></h4>
+  </div>
+{% endfor %}
+{%endif%}
+{% if entrou and not search%}
+	<div class="alert alert-warning" role="alert">Sem Resultado :(</div>
+{% endif %}
+
+{% endblock %}
